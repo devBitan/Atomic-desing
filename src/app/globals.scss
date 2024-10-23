@@ -1,0 +1,266 @@
+@import "../assets/sass/variables.scss";
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: linear-gradient(130deg, $bgmorado-claro, $bgrosa, $bgrojo) !important;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+//Navbar
+.nav-container{
+  display: flex;
+  justify-content: space-between;
+  padding: 1.5rem;
+}
+.title {
+  text-align: center;
+  padding: 1.5rem;
+}
+
+//left
+.tabs {
+  display: flex;
+  background-color: $bggris-inactivo;
+  border-radius: 25px;
+  // padding: 4px;
+  width: fit-content;
+}
+
+.tab {
+  background-color: $bggris-inactivo;
+  border: none;
+  border-radius: 25px;
+  padding: 10px 20px;
+  color: $gris-medio;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background-color 0.3s ease, color 0.3s ease; 
+  .icon-vacantes,
+  .icon-companias {
+    font-size: 18px; /* Puedes ajustar el tamaño del ícono aquí */
+  }
+}
+
+.active {
+  background-color: $morado;
+  color: $blanco-text;
+}
+
+.active2 {
+  background-color: $bgrosa;
+  color: $blanco-text;
+}
+
+.active:hover {
+  background-color: $morado-hover;
+  color: $blanco-text;
+}
+
+//right
+.nav-right {
+  display: flex;
+  flex-direction: column;
+  gap: 35px;
+  align-items: end;
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  border: 1px solid $gris-claro;
+  border-radius: 20px;
+  padding: 5px;
+}
+.input-search {
+  width: 200px;
+  padding: 5px;
+  border-style: none;
+}
+
+.btn-add {
+  border: none;
+  border-radius: 25px;
+  padding: 10px 20px;
+  color: $blanco-text;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  max-width: 164px;
+  transition: background-color 0.3s ease, color 0.3s ease; 
+  .icon-vacantes,
+  .icon-companias {
+    font-size: 18px; /* Puedes ajustar el tamaño del ícono aquí */
+  }
+}
+
+//-contener general -dahsboard
+.general-container {
+  max-width: 1200px;
+  margin: .7rem auto;
+  height: 96vh;
+  border-radius: 12px;
+  background-color: $bgblanco;
+  z-index: 3;
+}
+
+.title-dashboard {
+  padding-left: 1.5rem;
+  margin-top: -55px;
+}
+
+.cards {
+  gap: 20px; 
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 20px;
+}
+
+.card-container {
+  width: 373px;
+  background-color: $bgblanco;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+  padding: 20px;
+  position: relative;
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-container:hover {
+  transform: translateY(-5px); 
+  // box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 6px 12px $gris-claro;
+}
+
+.card-container h3 {
+  font-size: 1.25rem;
+  margin-bottom: 10px;
+}
+
+.card-container p {
+  color: $gris-medio;
+  margin: 5px 0;
+}
+
+.card-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.btn-edit, .btn-delete {
+  background-color: $bggris-inactivo;
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.btn-edit {
+  color: $morado; 
+}
+
+.btn-delete {
+  color: $bgrojo; 
+}
+
+//modal 
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 4;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 400px;
+  max-width: 100%;
+}
+
+.title-form {
+  display: flex;
+  justify-content: space-between;
+  span{
+    cursor: pointer;
+  }
+}
+
+.modal-content h2 {
+  margin-top: 0;
+}
+
+.modal-content form {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-content form label {
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.modal-content form input,
+.modal-content form textarea,
+.modal-content form select {
+  margin-top: 5px;
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: 1px solid $gris-claro;
+
+}
+.modal-content form textarea {
+  height: 80px;
+}
+
+.modal-content form button {
+  margin-top: 15px;
+  padding: 10px;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 6px;
+}
+
+// .modal-content form button[type="button"] {
+//   background-color: #f44336; /* Botón de cerrar */
+// }
+
+.modal-content form button:hover {
+  opacity: 0.8;
+}
