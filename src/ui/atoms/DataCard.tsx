@@ -1,13 +1,25 @@
-"use client"
-import { usePathname } from 'next/navigation'; // hook que permite obtener la ruta actual
-import { useState, useEffect } from "react";
+type DataCardProps = {
+    info: any,
+    activeTab: string,
+};
 
-const DataCard: React.FC = () => {
-    return(
+const DataCard: React.FC<DataCardProps> = ({ info, activeTab }) => {
+    return (
         <>
-        <p>Descripcion: joa mani</p>
-        <p>Estado: paila</p>
-        <p>Compañía: ojalá</p>
+            {activeTab === "vacancies" ? (
+                <>
+                    <h3>{info.title}</h3>
+                    <p>Description: {info.description}</p>
+                    <p>Status: {info.state}</p>
+                    <p>Company: {info.companyId}</p>
+                </>
+            ) : (
+                <>
+                    <h3>{info.name}</h3>
+                    <p>City: {info.city}</p>
+                    <p>Contac: {info.contact}</p>
+                </>
+            )}
         </>
     )
 }

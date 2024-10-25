@@ -1,11 +1,18 @@
-"use client"
-import { usePathname } from 'next/navigation'; // hook que permite obtener la ruta actual
-import { useState, useEffect } from "react";
 import { RiDeleteBinLine } from "react-icons/ri";
-const BtnDelete: React.FC = () => {
+
+type BtnDeleteProps = {
+    id: number;
+};
+
+const BtnDelete: React.FC<BtnDeleteProps> = ({ id }) => {
+
+    const handleDelete = () => {
+        console.log(`Delete item with id: ${id}`);
+    };
+
     return (
         <>
-            <button className='btn-delete'> <RiDeleteBinLine /></button>
+            <button className='btn-delete' onClick={handleDelete}> <RiDeleteBinLine /></button>
         </>
     )
 }
