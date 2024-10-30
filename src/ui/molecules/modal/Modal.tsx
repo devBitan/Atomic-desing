@@ -1,4 +1,5 @@
 import { IoMdClose } from "react-icons/io";
+// atomizar este componente
 
 interface ModalProps {
   isOpen: boolean;

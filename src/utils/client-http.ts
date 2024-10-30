@@ -1,4 +1,5 @@
-const defaultBaseUrl = "https://671638f633bc2bfe40bcf693.mockapi.io/api/v1";
+// const defaultBaseUrl = "http://192.168.88.153/api/v1";
+const defaultBaseUrl = "https://vacantsbackendgates-production.up.railway.app/api/v1";
 
 // /vacancies
 

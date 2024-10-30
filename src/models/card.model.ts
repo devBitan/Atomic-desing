@@ -1,7 +1,7 @@
 export interface ICompany {
     id: string,
     title: string,
-    ciry: string,
+    city: string,
     contact: string,
 }
 
@@ -12,3 +12,4 @@ export interface IVacant {
     status: string,
     company: string
 }
+

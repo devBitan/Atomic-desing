@@ -29,10 +29,12 @@ const Dashboard: React.FC<IProps> = ({ data }) => {
         if (pathname === "/vacancies") {
           setActiveTab("vacancies");
           const vacancies = await useVacantService.findAll();
+          console.log(vacancies?.content);
           setResponse(vacancies);
         } else if (pathname === "/companies") {
           setActiveTab("companies");
           const companies = await useCompanyService.findAll();
+          console.log(companies);
           setResponse(companies);
         }
       } catch (error) {
@@ -40,10 +42,9 @@ const Dashboard: React.FC<IProps> = ({ data }) => {
       }
     };
 
-    fetchData(); // Llamar a la función para realizar las solicitudes
+    fetchData(); 
   }, [pathname]);
 
-  // hacer el consumo y enviar por parámetros la data
   return (
     <>
       <Title />
