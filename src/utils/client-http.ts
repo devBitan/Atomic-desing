@@ -1,64 +1,61 @@
-// const defaultBaseUrl = "http://192.168.88.153/api/v1";
 const defaultBaseUrl = "https://vacantsbackendgates-production.up.railway.app/api/v1";
-
-// /vacancies
 
 export class HttpClient {
     private baseUrl: string;
-
-    constructor(baseUrl?: string){
+    constructor(baseUrl?: string) {
         this.baseUrl = baseUrl || defaultBaseUrl;
     }
 
-    async get<T>(url:string): Promise<T>{
+    async get<T>(url: string): Promise<T> {
         const headers = await this.getHeader();
-        const response = await fetch(`${this.baseUrl}/${url}`,{
-            headers: headers,
-            method: 'GET',
+        const response = await fetch(`${this.baseUrl}/${url}`, {
+            headers,
+            method: "GET",
             cache: "no-store"
-        })
+        });
         return await this.handleResponse(response);
     }
 
-    async post<T, R>(url:string, body:R): Promise<T>{
+    async post<T, B>(url: string, body: B): Promise<T> {
         const headers = await this.getHeader();
         const response = await fetch(`${this.baseUrl}/${url}`, {
-            headers: headers,
-            method: 'POST',
+            headers,
+            method: "POST",
             body: JSON.stringify(body)
-        })
+        });
         return await this.handleResponse(response);
     }
 
-    async put<T, R>(url: string, body:R): Promise<T> {
-        const headers = await this.getHeader();
-        const response = await fetch(`${this.baseUrl}/${url}`,{
-            headers: headers,
-            method: 'PUT',
-            body: JSON.stringify(body)
-        })
-        return await this.handleResponse(response);
-    }
-
-    async delete<T>(url:string): Promise<T> {
+    async put<T, B>(url: string, body: B): Promise<T> {
         const headers = await this.getHeader();
         const response = await fetch(`${this.baseUrl}/${url}`, {
-            headers: headers,
-            method: 'DELETE'
-        })
+            headers,
+            method: "PUT",
+            body: JSON.stringify(body)
+        });
         return await this.handleResponse(response);
     }
 
-    private async getHeader() {
+    async delete(url: string): Promise<void> {
+        const headers = await this.getHeader();
+        const response = await fetch(`${this.baseUrl}/${url}`, {
+            headers,
+            method: "DELETE",
+        });
+        return await this.handleResponse(response);
+    }
+
+    private async getHeader(){
         return {
             "Content-Type": "application/json",
+            "accept": "*/*"
         }
     }
 
-    private async handleResponse(response: Response) {
-        if (!response.ok) {
-            const errorData = await response.json()
-            throw new Error(errorData.message || "error")
+    private async handleResponse(response: Response){
+        if(!response.ok){
+            const errorData = await response.json();
+            throw new Error(errorData.message || "Ocurrió un error")
         }
         return await response.json();
     }

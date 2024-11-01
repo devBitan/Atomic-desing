@@ -1,50 +1,60 @@
-import { ICompany } from "@/models/card.model";
-import { HttpClient } from "@/utils/client-http";
-// /company
+import { ICompany, ICompanyRequest, IBasicCompany, IContent} from "../models/company.model";
+import { HttpClient } from "../utils/client-http";
+
 export class CompanyService {
-    private httpCliente: HttpClient;
+    private httpClient: HttpClient;
 
     constructor(){
-        this.httpCliente = new HttpClient();
+        this.httpClient = new HttpClient();
+    }
+
+    async findAllWithPagination({page, size, name}:ICompanyRequest){
+        try {
+            const companies = await this.httpClient.get<ICompany>(`company?page=${page}&size=${size}&name=${name || ""}`)
+            return companies;
+        } catch (error) {
+            console.log(error);
+            throw new Error("Error al obtener las compañías");
+        }
     }
 
     async findAll(){
         try {
-            const coders = this.httpCliente.get<ICompany[]>("company")
-            return coders;
+            const companies = await this.httpClient.get<IContent[]>(`company/all`)
+            return companies;
         } catch (error) {
-            console.error("Error al buscar company", error);
-            throw error;
+            console.log(error);
+            throw new Error("Error al obtener las compañías");
         }
     }
 
-    async destroy(id:string) {
+    async create(company: IBasicCompany){
         try {
-            const coders = this.httpCliente.delete<ICompany[]>(`company/${id}`)
-            return coders;
+            const newCompany = await this.httpClient.post< IContent, IBasicCompany>(`company`, company)
+            return newCompany;
         } catch (error) {
-            console.error("Error al eliminar company", error);
-            throw error;
+            console.log(error);
+            throw new Error("Error al crear la compañía");
         }
     }
 
-    async create(coder: ICompany) {
+    async update(id: string, company: IBasicCompany){
         try {
-            const newCoder = this.httpCliente.post<string, ICompany>(`company`, coder)
-            return newCoder;
+            const updatedCompany = await this.httpClient.put<IContent, IBasicCompany>(`company/${id}`, company)
+            return updatedCompany;
         } catch (error) {
-            console.error("Error al crear company", error);
-            throw error;
+            console.log(error);
+            throw new Error("Error al actualizar la compañía");
         }
     }
 
-    async update(id: string, coder: ICompany) {
+    async destroy(id: string){
         try {
-            const updateCoder = this.httpCliente.put<string, ICompany>(`company/${id}`,coder)
-            return updateCoder;
+            const company = await this.httpClient.delete(`company/${id}`)
+            return company;
         } catch (error) {
-            console.error("Error al axtualizar company", error);
-            throw error;
+            console.log(error)
+            throw new Error("Error al eliminar la compañía");
         }
     }
 }

@@ -1,50 +1,51 @@
-import { IVacant } from "@/models/card.model";
-import { HttpClient } from "@/utils/client-http";
-// /vacants
+import { IVacant, IBasicVacant, IContentVacant } from "../models/vacant.model";
+import { IPaginationRequest } from "@/models/pagination.model";
+import { HttpClient } from "../utils/client-http";
+
 export class VacantService {
-    private httpCliente: HttpClient;
+    private httpClient: HttpClient;
 
-    constructor() {
-        this.httpCliente = new HttpClient();
+    constructor(){
+        this.httpClient = new HttpClient();
     }
 
-    async findAll() {
+    async findAllWithPagination({page, size}: IPaginationRequest){
         try {
-            const coders = this.httpCliente.get<IVacant[]>("vacants")
-            return coders;
+            const vacants = await this.httpClient.get<IVacant>(`vacants?page=${page}&size=${size}`)
+            return vacants;
         } catch (error) {
-            console.error("Error al buscar vacants", error);
-            throw error;
+            console.log(error);
+            throw new Error("Error al obtener las compañías");
         }
     }
 
-    async destroy(id: string) {
+    async create(vacant: IBasicVacant){
         try {
-            const coders = this.httpCliente.delete<IVacant[]>(`vacants/${id}`)
-            return coders;
+            const newVacant = await this.httpClient.post<IContentVacant, IBasicVacant>("vacants", vacant)
+            return newVacant;
         } catch (error) {
-            console.error("Error al eliminar vacants", error);
-            throw error;
+            console.log(error);
+            throw new Error("Error al crear la vacante");
         }
     }
 
-    async create(coder: IVacant) {
+    async update(id: string, vacant: IBasicVacant){
         try {
-            const newCoder = this.httpCliente.post<string, IVacant>(`vacants`, coder)
-            return newCoder;
+            const updatedVacant = await this.httpClient.put<IContentVacant, IBasicVacant>(`vacants/${id}`, vacant)
+            return updatedVacant;
         } catch (error) {
-            console.error("Error al crear vacants", error);
-            throw error;
+            console.log(error);
+            throw new Error("Error al actualizar la vacante");
         }
     }
 
-    async update(id: string, coder: IVacant) {
+    async destroy(id: string){
         try {
-            const updateCoder = this.httpCliente.put<string, IVacant>(`vacants/${id}`, coder)
-            return updateCoder;
+            const vacant = await this.httpClient.delete(`vacants/${id}`)
+            return vacant;
         } catch (error) {
-            console.error("Error al axtualizar vacants", error);
-            throw error;
+            console.log(error)
+            throw new Error("Error al eliminar la vacante");
         }
     }
 }

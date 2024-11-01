@@ -10,13 +10,13 @@ const DataCard: React.FC<DataCardProps> = ({ info, activeTab }) => {
                 <>
                     <h3>{info.title}</h3>
                     <p>Description: {info.description}</p>
-                    <p>Status: {info.state}</p>
-                    <p>Company: {info.companyId}</p>
+                    <p>Status: {info.status}</p>
+                    <p>Company: {info.company.name}</p>
                 </>
             ) : (
                 <>
                     <h3>{info.name}</h3>
-                    <p>City: {info.city}</p>
+                    <p>City: {info.location}</p>
                     <p>Contac: {info.contact}</p>
                 </>
             )}
