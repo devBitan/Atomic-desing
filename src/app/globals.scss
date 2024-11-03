@@ -28,11 +28,11 @@ a {
 .nav-container{
   display: flex;
   justify-content: space-between;
-  padding: 1rem 1.5rem;
+  padding: .5rem 1.5rem;
 }
 .title {
   text-align: center;
-  padding-top: 1rem;
+  padding-top: .5rem;
 }
 
 //left
@@ -80,7 +80,7 @@ a {
 .nav-right {
   display: flex;
   flex-direction: column;
-  gap: 35px;
+  gap: 20px;
   align-items: end;
 }
 
@@ -127,7 +127,7 @@ a {
 
 .title-dashboard {
   padding-left: 1.5rem;
-  margin-top: -55px;
+  margin-top: -40px;
 }
 
 .cards {
@@ -265,4 +265,9 @@ a {
 
 .modal-content form button:hover {
   opacity: 0.8;
+}
+
+
+footer {
+  margin-top: -12px;
 }
