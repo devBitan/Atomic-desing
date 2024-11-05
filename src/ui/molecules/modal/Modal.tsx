@@ -91,19 +91,11 @@ const Modal: React.FC<ModalProps> = ({ isOpen, activeTab, data, onClose }) => {
               <label htmlFor="description">Description:</label>
               <textarea id="description" name="description" value={(form as IVacant)?.description} onChange={handleChange} required></textarea>
 
-              <label htmlFor="status">Status:</label>
-              <select name="status" id="status" value={(form as IVacant)?.status} onChange={handleChange} required>
-                <option value="">Select status</option>
-                <option value="open">Open</option>
-                <option value="closed">Closed</option>
-              </select>
+              <label htmlFor="location">Status:</label>
+              <input type="text" id="location" name="location" value={(form as IVacant)?.status} onChange={handleChange} required />
 
-              <label htmlFor="companyId">Company:</label>
-              <select name="companyId" id="companyId" value={(form as IBasicVacant)?.companyId} onChange={handleChange} required>
-                <option value="">Select company</option>
-                <option value="riwi">Riwi</option>
-                <option value="google">Google</option>
-              </select>
+              <label htmlFor="contact">Company:</label>
+              <input type="text" id="contact" name="contact" value={(form as IVacant)?.company?.name} onChange={handleChange} required />
             </>
           ) : (
             <>
